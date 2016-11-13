@@ -47,7 +47,6 @@ package jsceneviewer.inventor.qt;
 import jscenegraph.database.inventor.SbTime;
 import jscenegraph.database.inventor.SoDB;
 import jsceneviewer.QTimer;
-import jsceneviewer.QTimer.QCallback;
 
 /**
  * @author Yves Boyadjian

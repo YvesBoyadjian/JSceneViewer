@@ -61,7 +61,6 @@ import jscenegraph.database.inventor.SbViewportRegion;
 import jscenegraph.database.inventor.SbXfBox3f;
 import jscenegraph.database.inventor.SoDB;
 import jscenegraph.database.inventor.SoFullPath;
-import jscenegraph.database.inventor.SoPath;
 import jscenegraph.database.inventor.SoPickedPoint;
 import jscenegraph.database.inventor.SoType;
 import jscenegraph.database.inventor.actions.SoGetBoundingBoxAction;

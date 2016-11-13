@@ -42,13 +42,13 @@
 
 package jsceneviewer.inventor.qt.viewers;
 
-import javax.media.opengl.GL2;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.widgets.Composite;
+
+import com.jogamp.opengl.GL2;
 
 import jscenegraph.database.inventor.SbBox3f;
 import jscenegraph.database.inventor.SbMatrix;
@@ -75,8 +75,8 @@ import jscenegraph.database.inventor.nodes.SoPackedColor;
 import jscenegraph.database.inventor.nodes.SoSeparator;
 import jscenegraph.database.inventor.nodes.SoSwitch;
 import jsceneviewer.inventor.qt.SoQtCameraController;
-import jsceneviewer.inventor.qt.SoQtRenderArea;
 import jsceneviewer.inventor.qt.SoQtCameraController.Type;
+import jsceneviewer.inventor.qt.SoQtRenderArea;
 
 /**
  * @author Yves Boyadjian

@@ -59,8 +59,8 @@ import jscenegraph.database.inventor.nodes.SoOrthographicCamera;
 import jscenegraph.database.inventor.nodes.SoPerspectiveCamera;
 import jsceneviewer.QDoubleSpinBox;
 import jsceneviewer.QSlider;
-import jsceneviewer.inventor.qt.SoQtIcons;
 import jsceneviewer.inventor.qt.SoQtCameraController.Type;
+import jsceneviewer.inventor.qt.SoQtIcons;
 
 /**
  * @author Yves Boyadjian

@@ -51,14 +51,10 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.ToolItem;
 
 import jscenegraph.database.inventor.SbMatrix;
 import jscenegraph.database.inventor.SbVec2s;
@@ -82,9 +78,9 @@ import jscenegraph.database.inventor.sensors.SoFieldSensor;
 import jscenegraph.database.inventor.sensors.SoSensor;
 import jscenegraph.database.inventor.sensors.SoSensorCB;
 import jsceneviewer.QDoubleSpinBox;
+import jsceneviewer.inventor.qt.SoQtCameraController.Type;
 import jsceneviewer.inventor.qt.SoQtIcons;
 import jsceneviewer.inventor.qt.SoQtThumbWheel;
-import jsceneviewer.inventor.qt.SoQtCameraController.Type;
 
 /**
  * @author Yves Boyadjian

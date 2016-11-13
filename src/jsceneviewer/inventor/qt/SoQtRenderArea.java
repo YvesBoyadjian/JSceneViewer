@@ -42,14 +42,13 @@
 
 package jsceneviewer.inventor.qt;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLCapabilitiesImmutable;
-import javax.media.opengl.GLProfile;
-
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
 
 import jscenegraph.database.inventor.elements.SoWindowElement;
 import jscenegraph.database.inventor.misc.SoState;
