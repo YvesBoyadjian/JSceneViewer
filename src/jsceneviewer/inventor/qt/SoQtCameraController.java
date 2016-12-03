@@ -965,7 +965,7 @@ public void zoomCamera (float amount)
 
         // finally reposition the camera
         final SbMatrix mx = new SbMatrix();
-        mx.copyFrom( camera.orientation.getValue());
+        mx.copyFrom( camera.orientation.getValue().getMatrix());
         final SbVec3f forward = new SbVec3f(-mx.getValue()[2][0], -mx.getValue()[2][1], -mx.getValue()[2][2]);
         camera.position.setValue(camera.position.getValue().operator_add(
                             forward.operator_mul((focalDistance - newFocalDist))));
