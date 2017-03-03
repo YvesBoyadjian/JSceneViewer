@@ -45,6 +45,8 @@ package jsceneviewer.inventor.qt;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -117,11 +119,11 @@ public class SoQtGLWidget extends Composite {
 	}
 	
 
-public void makeCurrent()
-{
-    getGLWidget().getContext().makeCurrent();
-}
-
+	public void makeCurrent()
+	{
+	    getGLWidget().getContext().makeCurrent();
+	}
+	
 	
     public boolean doubleBuffer() {
     	return format().getDoubleBuffered();
@@ -620,8 +622,7 @@ public int getColorBitDepth()
 }
 
 
-protected boolean      isStereoBuffer()  { 
-	return /*context().format().stereo()*/false; //TODO 
+	protected boolean      isStereoBuffer()  { 
+		return /*context().format().stereo()*/false; //TODO 
 	}
-
 }

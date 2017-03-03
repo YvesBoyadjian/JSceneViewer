@@ -43,7 +43,10 @@
 package jsceneviewer.inventor.qt;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.Point;
@@ -440,6 +443,7 @@ public class SoQtIcons {
 	            ImageData icon = null;
 	            if(imageDescriptor != null) {
 	            	icon = imageDescriptor.getImageData();
+		            icon = resize(icon, 27,27);
 	            }
 	            //QIcon icon (resourceName);
 	            if (icon == null) {
@@ -551,5 +555,31 @@ public class SoQtIcons {
 	    	return normBitmap;
 	    }
 
-	    
+	    private static ImageData resize(ImageData icon, int width, int height) {
+            Image image = new Image(Display.getCurrent(),icon);
+	    	Image scaled = new Image(Display.getDefault(), width, height);
+	    	GC gc = new GC(scaled);
+	    	gc.setAntialias(SWT.ON);
+	    	gc.setInterpolation(SWT.HIGH);
+	    	gc.drawImage(image, 0, 0,image.getBounds().width, image.getBounds().height, 0, 0, width, height);
+	    	gc.dispose();
+
+	    	// Image data from scaled image and transparent pixel from original
+
+	    	ImageData imageData = scaled.getImageData();
+	    	
+	    	ImageData origData = image.getImageData();
+
+	    	imageData.transparentPixel = imageData.palette.getPixel(origData.palette.getRGB(origData.transparentPixel));
+
+	    	// Final scaled transparent image
+
+	    	Image finalImage = new Image(Display.getDefault(), imageData);
+
+	    	scaled.dispose();
+            image.dispose();
+	    	ImageData retImageData = finalImage.getImageData();
+	    	finalImage.dispose();
+	    	return retImageData;
+	    }	    
 }
