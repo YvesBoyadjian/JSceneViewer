@@ -263,7 +263,7 @@ public void setViewing (boolean flag)
 }
 
 
-void setHeadlight (boolean flag)
+public void setHeadlight (boolean flag)
 {
     if (flag == getCameraController().isHeadlight()) {
         return;

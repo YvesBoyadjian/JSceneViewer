@@ -77,7 +77,7 @@ public class SoQtDevice {
 		  classTypeId.copyFrom(SoType.createType(SoType.badType(), new SbName("SoQtDevice")));		  
 	  }
 		  
-	  protected static SoType SO_QT_DEVICE_INIT_CLASS(final Class className, Class parentClass, SoType classTypeId) {
+	  protected static SoType SO_QT_DEVICE_INIT_CLASS(final Class<? extends SoQtDevice> className, Class<? extends SoQtDevice> parentClass, SoType classTypeId) {
 		  SoType parentClassTypeId;
 		try {
 			parentClassTypeId = (SoType)parentClass.getMethod("getClassTypeId").invoke(null);
