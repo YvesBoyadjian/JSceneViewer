@@ -273,7 +273,7 @@ public void setSceneGraph(SoNode newScene)
 
         SoCamera newCamera = null;
         if (sa.getPath() != null) {
-            newCamera = (SoCamera )( new SoFullPath (sa.getPath())).getTail();
+            newCamera = (SoCamera )( SoFullPath.cast(sa.getPath())).getTail();
         }
 
         // if no camera found create one of the right kind...
@@ -412,7 +412,7 @@ public void    toggleCameraType() {
     final SoSearchAction sa = new SoSearchAction();
     sa.setNode(camera);
     sa.apply(sceneRoot);
-    SoFullPath fullCamPath = new SoFullPath ( sa.getPath());
+    SoFullPath fullCamPath = SoFullPath.cast( sa.getPath());
     if (fullCamPath != null) {
         SoGroup parent = (SoGroup )fullCamPath.getNode(fullCamPath.getLength() - 2);
         parent.insertChild(newCam, parent.findChild(camera));
@@ -857,7 +857,7 @@ public void setHeadlight(boolean insertFlag)
         final SoSearchAction sa = new SoSearchAction();
         sa.setNode(camera);
         sa.apply(sceneRoot);
-        SoFullPath fullPath = new SoFullPath ( sa.getPath());
+        SoFullPath fullPath = SoFullPath.cast( sa.getPath());
         if (fullPath == null) {
     //#if DEBUG
             SoDebugError.post("SoQtCameraController::setHeadlight",

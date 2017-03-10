@@ -509,7 +509,7 @@ public void        setFeedbackVisibility(boolean insertFlag) {
         sa.setSearchingAll(true); // find under OFF switches for removal
     }
     sa.apply(sceneRoot);
-    SoFullPath fullPath = new SoFullPath ( sa.getPath());
+    SoFullPath fullPath = SoFullPath.cast( sa.getPath());
     if (fullPath == null) {
 //#if DEBUG
         SoDebugError.post("SoQtExaminerViewer.setFeedbackVisibility",
