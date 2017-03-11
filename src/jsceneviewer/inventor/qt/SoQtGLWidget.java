@@ -45,8 +45,6 @@ package jsceneviewer.inventor.qt;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -427,6 +425,7 @@ public GLCapabilities format()
     }
     
     protected void destructor() {
+        contextShareManager.removeWidget (mainWidget);
 	}
 
 	public static enum EventType {
@@ -572,7 +571,7 @@ public
 	}
 
     //! remove GL widget from the internal sharing list.
-    void removeWidget (GLCanvas widget) {
+    public void removeWidget (GLCanvas widget) {
         while(entries.remove (widget));
     }
 

@@ -147,6 +147,7 @@ public class SoQtRenderArea extends SoQtGLWidget {
 	
 	public void destructor() {
 		soQtSceneHandler.destructor();
+		super.destructor();
 	}
 
     //! Calling this forces the render area to be redrawn now.

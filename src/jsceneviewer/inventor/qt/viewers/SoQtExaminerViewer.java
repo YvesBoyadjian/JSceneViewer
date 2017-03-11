@@ -887,6 +887,18 @@ private void switchMode(int newMode, int buttons)
         case PAN_MODE_ACTIVE:
             getCameraController().startDrag(locator);
             break;
+	case DOLLY_MODE:
+		break;
+	case INTERACT_MODE_COUNT:
+		break;
+	case PAN_MODE:
+		break;
+	case SEEK_MODE:
+		break;
+	case SPIN_MODE:
+		break;
+	default:
+		break;
     }
 }
 
