@@ -419,7 +419,7 @@ protected void createFeedbackNodes()
     feedbackSwitch.addChild( feedbackTransNode );
     feedbackSwitch.addChild( feedbackScaleNode );
     final SoInput in = new SoInput();
-    in.setBuffer((Object)geometryBuffer, geometryBuffer.length());
+    in.setBuffer(geometryBuffer, geometryBuffer.length());
     final SoNode[] node = new SoNode[1];
     boolean ok = SoDB.read(in, node);
     if (ok && node != null) {
