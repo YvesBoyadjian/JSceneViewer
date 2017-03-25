@@ -127,6 +127,7 @@ public class SoQtRenderArea extends SoQtGLWidget {
 	    // Inventor specific variables
 //	    QGLFormat glf (QGL::Rgba | QGL::DoubleBuffer | QGL::DepthBuffer | QGL::DirectRendering);
 	    GLCapabilities glf = new GLCapabilities(GLProfile.getDefault());
+	    glf.setDepthBits(24);
 	    // Call setFormat from parent class to avoid early construction of decoration which will fail
 	    super.setFormat(glf, style);
 
