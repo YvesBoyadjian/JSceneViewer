@@ -313,6 +313,7 @@ public void setSceneGraph(SoNode newScene)
         } else {
             setCamera(newCamera, false);
         }
+        sa.destructor();
     }
 }
 
@@ -892,6 +893,7 @@ public void setHeadlight(boolean insertFlag)
               headlightParent.insertChild(headlightGroup, camIndex+1);
           }
         }
+        sa.destructor();
     }
 
     // we must still update the headlightFlag

@@ -376,6 +376,7 @@ public void destructor()
 	            if (sceneSize <= 0.0) {
 	                sceneSize = 0.0f;
 	            }	        	
+	            bboxAct.destructor();
 	        }
 
 
