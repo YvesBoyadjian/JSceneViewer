@@ -57,6 +57,7 @@ import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
@@ -242,7 +243,7 @@ public GLCapabilities format()
     //@{ A set of virtual functions with the same meaning as in QGLWidget, calls are
     //! redirected from the real QGLWidget
     protected void initializeGL(GL2 gl2) {
-        gl2.glEnable(GL2.GL_DEPTH_TEST);    	
+        gl2.glEnable(GL2.GL_DEPTH_TEST);  
     }    
     
     protected void paintGL(GL2 gl2) {}

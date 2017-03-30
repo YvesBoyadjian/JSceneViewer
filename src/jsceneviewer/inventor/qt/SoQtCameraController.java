@@ -218,6 +218,7 @@ public abstract class SoQtCameraController {
         headlightParentSensor.setDeleteCallback(SoQtCameraController::headlightParentDeletedCB, this);
 
         rotBuffer = new SbRotation[ROT_BUFF_SIZE];
+        for(int i=0;i<ROT_BUFF_SIZE;i++) rotBuffer[i] = new SbRotation();
 
         // init the projector class
         final SbViewVolume vv = new SbViewVolume();
@@ -754,7 +755,7 @@ public void adjustCameraClippingPlanes()
     autoClipBboxAction.setViewportRegion(new SbViewportRegion(sceneSize));
     autoClipBboxAction.apply(sceneRoot);
 
-    final SbXfBox3f xfbbox = autoClipBboxAction.getXfBoundingBox();
+    final SbXfBox3f xfbbox = new SbXfBox3f(autoClipBboxAction.getXfBoundingBox());
 
     // get camera transformation and apply to xfbbox
     // to align the bounding box to camera space.
@@ -927,7 +928,7 @@ public void rotateCamera(final SbRotation rot)
     if (camera == null) { return; }
 
     // get center of rotation
-    SbRotation camRot = camera.orientation.getValue();
+    SbRotation camRot = new SbRotation(camera.orientation.getValue());
     float radius = camera.focalDistance.getValue();
     final SbMatrix mx = new SbMatrix();
     mx.copyFrom(camRot.getMatrix());
@@ -1017,7 +1018,7 @@ public void spinCamera(final SbVec2s newPos)
 
     // save rotation for animation
     lastIndex = ((lastIndex+1) % ROT_BUFF_SIZE);
-    rotBuffer[lastIndex] = rot;
+    rotBuffer[lastIndex].copyFrom(rot);
     computeAverage = true;
 
     // check if queue is full
