@@ -724,7 +724,7 @@ public boolean      isClearBeforeRender() { return clearFirst; }
 
 
 
-void redrawOnSelectionChange (SoSelection s)
+public void redrawOnSelectionChange (SoSelection s)
 {
     if (s != selection) {
 
