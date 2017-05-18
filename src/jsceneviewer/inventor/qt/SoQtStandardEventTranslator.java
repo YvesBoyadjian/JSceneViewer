@@ -145,8 +145,13 @@ public class SoQtStandardEventTranslator {
       //case QEvent::MouseButtonRelease:
       //  event = translateButtonEvent(mouseEvent, SoButtonEvent::UP, viewportSize);
         //break;
-  if( anyEvent instanceof MouseEvent && mouseEvent.button != 0) {
-        	event = translateButtonEvent(mouseEvent, viewportSize);
+  if( anyEvent instanceof MouseEvent /*&& mouseEvent.button != 0*/ &&
+		  ( 
+		  type == EventType.MOUSE_EVENT_MOUSE_DOWN) ||
+		  type == EventType.MOUSE_EVENT_DOUBLE_CLICK ||
+		  type == EventType.MOUSE_EVENT_MOUSE_UP
+		  ){
+        	event = translateButtonEvent(mouseEvent, type, viewportSize);
   }
   else if( anyEvent instanceof MouseEvent) {
       //case QEvent::MouseMove:
@@ -196,7 +201,7 @@ public class SoQtStandardEventTranslator {
 	   }
 
 
-private SoMouseButtonEvent translateButtonEvent (MouseEvent be, final SbVec2s viewportSize)
+private SoMouseButtonEvent translateButtonEvent (MouseEvent be, EventType type, final SbVec2s viewportSize)
 {
   SoMouseButtonEvent.Button whichButton;
   switch (be.button) {
@@ -217,10 +222,10 @@ private SoMouseButtonEvent translateButtonEvent (MouseEvent be, final SbVec2s vi
   fillInEventState (buttonEvent, be, viewportSize);
   
   SoButtonEvent.State whichState = State.UNKNOWN;
-  if(be.stateMask == 0) {
+  if(type == EventType.MOUSE_EVENT_MOUSE_DOWN || type == EventType.MOUSE_EVENT_DOUBLE_CLICK) {
 	  whichState = State.DOWN;
   }
-  else {
+  else if(type == EventType.MOUSE_EVENT_MOUSE_UP){
 	  whichState = State.UP;
   }
 

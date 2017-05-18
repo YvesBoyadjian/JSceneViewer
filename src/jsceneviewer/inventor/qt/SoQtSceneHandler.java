@@ -65,6 +65,7 @@ import jscenegraph.database.inventor.actions.SoGLRenderAction;
 import jscenegraph.database.inventor.elements.SoGLLazyElement;
 import jscenegraph.database.inventor.elements.SoLazyElement;
 import jscenegraph.database.inventor.events.SoEvent;
+import jscenegraph.database.inventor.events.SoMouseButtonEvent;
 import jscenegraph.database.inventor.misc.SoState;
 import jscenegraph.database.inventor.nodes.SoCallback;
 import jscenegraph.database.inventor.nodes.SoCallbackCB;
@@ -485,7 +486,7 @@ boolean removeSceneCallback (SoCallback callbackNode)
         lockEventHandling = false;
 
         if (isMouseEvent) {
-            storedButtonState = ((MouseEvent)anyEvent).stateMask & SWT.BUTTON_MASK;
+            storedButtonState = buttons((MouseEvent)anyEvent);
             lastEventPosition = new Point(((MouseEvent)anyEvent).x,((MouseEvent)anyEvent).y);
             lastEventWidget = anyEvent.widget;
             lastEventPositionValid = true;
@@ -498,14 +499,9 @@ boolean removeSceneCallback (SoCallback callbackNode)
 
 void synthesizeCurrentButtonState (MouseEvent me, EventType type)
 {
+	
     // synthesize input state _before_ this event
-	int buttonCode = 0;
-	switch(me.button) {
-	case 1: buttonCode = SWT.BUTTON1; break;
-	case 2: buttonCode = SWT.BUTTON2; break;
-	case 3: buttonCode = SWT.BUTTON3; break;
-	}
-    int buttonState = (type == EventType.MOUSE_EVENT_MOUSE_MOVE) ? me.stateMask : (me.stateMask ^ buttonCode);
+    int buttonState = (type == EventType.MOUSE_EVENT_MOUSE_MOVE) ? buttons(me) : (buttons(me) ^ button(me));
     if (buttonState != storedButtonState) {
         // first generate button release events for every button that is different:
         synthesizeButtonState (buttonState, SWT.BUTTON1,  me, false);
@@ -518,6 +514,19 @@ void synthesizeCurrentButtonState (MouseEvent me, EventType type)
     }
 }
 
+private static final int buttons(MouseEvent me) {
+	return (me.stateMask & SWT.BUTTON_MASK) ^ button(me);
+}
+
+private static final int button(MouseEvent me) {
+	int buttonCode = 0;
+	switch(me.button) {
+	case 1: buttonCode = SWT.BUTTON1; break;
+	case 2: buttonCode = SWT.BUTTON2; break;
+	case 3: buttonCode = SWT.BUTTON3; break;
+	}
+	return buttonCode;
+}
 
 void synthesizeButtonState (int newButtons,
                                          int button,
@@ -588,7 +597,7 @@ void translateAndSendEvent(TypedEvent anyevent, EventType type)
 {
     // send event to the scene
     final SoEvent soevent = translateEvent (anyevent, type);
-
+    
     // if no translation possible, return...
     if (soevent == null) { return; }
 
