@@ -949,7 +949,7 @@ public boolean isStereoViewing()
     protected int             getInteractiveCount()   { return interactiveCount; }
 
 
-    protected SoQtCameraController getCameraController() {
+    public SoQtCameraController getCameraController() {
     	return cameraController;
     }
 
