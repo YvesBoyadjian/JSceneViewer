@@ -312,7 +312,8 @@ public GLCapabilities format()
 
 			@Override
 			public void mouseHover(MouseEvent e) {
-				event(e, EventType.MOUSE_EVENT_MOUSE_HOVER);
+				// Mouse hover is not handled by viewer
+				//event(e, EventType.MOUSE_EVENT_MOUSE_HOVER);
 			}
         	
         });
