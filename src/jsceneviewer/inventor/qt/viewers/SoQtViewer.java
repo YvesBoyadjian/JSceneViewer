@@ -168,8 +168,8 @@ public class SoQtViewer extends SoQtRenderArea {
 	    public SoQtViewer( Type type, Composite parent) {
 	    	this(type, parent, 0);
 	    }
-	    public SoQtViewer (Type type, Composite parent, int f) {
-	    	super(parent, f, false);
+	    public SoQtViewer (Type type, Composite parent, int style) {
+	    	super(parent, style, false);
 	    	
 	    	cameraController = new SoQtCameraController(type) {
 

@@ -46,9 +46,11 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.ToolBar;
 
@@ -147,8 +149,12 @@ public class SoQtFullViewer extends SoQtViewer {
 	    public SoQtFullViewer (BuildFlag flag, Type type, Composite parent) {
 	    	this(flag,type,parent,0);
 	    }
-	    public SoQtFullViewer (BuildFlag flag, Type type, Composite parent, int f) {
-	    	super(type,parent,f);
+	    public SoQtFullViewer (BuildFlag flag, Type type, Composite parent, int style) {
+	    	super(type,parent,style);
+	        // init decoration vars
+	        // (decorations really are created all the time, they just are hidden if this flag is not set)
+	        decorationFlag = (flag.value & BuildFlag.BUILD_DECORATION.value) != 0;
+
 	        initWidgets();
 	    	//TODO
 	    }
@@ -403,18 +409,35 @@ public void setCamera (SoCamera newCamera, boolean createdCamera)
 }
 
 
-void setDecoration (boolean flag)
+public void setDecoration (boolean flag)
 {
     if (flag == decorationFlag) {
         return;
     }
     decorationFlag = flag;
+    doSetDecoration();
+}
+
+private void doSetDecoration() {
 
     if (leftTrimForm != null) {
         leftTrimForm.setVisible (decorationFlag);
     }
     if (rightTrimForm != null) {
         rightTrimForm.setVisible (decorationFlag);
+        rightTrimForm.setLayout(new Layout() {
+
+			@Override
+			protected Point computeSize(Composite composite, int wHint, int hHint, boolean flushCache) {
+				return new Point(0,0);
+			}
+
+			@Override
+			protected void layout(Composite composite, boolean flushCache) {
+				// nothing to do
+			}
+        	
+        });
     }
     if (bottomTrimForm != null) {
         bottomTrimForm.setVisible (decorationFlag);
@@ -424,6 +447,7 @@ void setDecoration (boolean flag)
     //decorationAction.setChecked (decorationFlag); TODO
 }
 
+public boolean          isDecoration()      { return decorationFlag; }
 
 public double getCameraZoom()
 {
@@ -461,5 +485,8 @@ public void setZoomSliderPosition (double zoom)
     }
 }
 
-
+	public void buildWidget(int style) {
+		super.buildWidget(style);
+		doSetDecoration();
+	}
 }

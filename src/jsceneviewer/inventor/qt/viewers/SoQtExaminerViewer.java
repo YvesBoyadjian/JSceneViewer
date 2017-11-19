@@ -185,6 +185,20 @@ public class SoQtExaminerViewer extends SoQtFullViewer {
         commonConstructor();
     }
 
+    //! compatibility constructor
+    public SoQtExaminerViewer (Composite parent, String name,
+    boolean buildInsideParent, BuildFlag flag,
+    Type type, boolean buildNow) {
+    	super (flag, type, parent, SWT.NONE);
+
+    //setObjectName (name);
+    commonConstructor();
+    if (buildNow) {
+        buildWidget(0);
+        updateCursor();
+    }
+}
+
 
     private void commonConstructor()
 {
