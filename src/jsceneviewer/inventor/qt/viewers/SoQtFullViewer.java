@@ -425,19 +425,21 @@ private void doSetDecoration() {
     }
     if (rightTrimForm != null) {
         rightTrimForm.setVisible (decorationFlag);
-        rightTrimForm.setLayout(new Layout() {
-
-			@Override
-			protected Point computeSize(Composite composite, int wHint, int hHint, boolean flushCache) {
-				return new Point(0,0);
-			}
-
-			@Override
-			protected void layout(Composite composite, boolean flushCache) {
-				// nothing to do
-			}
-        	
-        });
+        if(!decorationFlag) {
+	        rightTrimForm.setLayout(new Layout() {
+	
+				@Override
+				protected Point computeSize(Composite composite, int wHint, int hHint, boolean flushCache) {
+					return new Point(0,0);
+				}
+	
+				@Override
+				protected void layout(Composite composite, boolean flushCache) {
+					// nothing to do
+				}
+	        	
+	        });
+        }
     }
     if (bottomTrimForm != null) {
         bottomTrimForm.setVisible (decorationFlag);
