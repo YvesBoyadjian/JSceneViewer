@@ -111,8 +111,10 @@ public abstract class SoQtCameraController {
     protected float           seekDistance;
     protected boolean          seekDistAsPercentage; //! percentage/absolute flag
     protected boolean          computeSeekVariables;
-    protected final SbVec3f         seekPoint = new SbVec3f(), seekNormal = new SbVec3f();
-    protected final SbRotation      oldCamOrientation = new SbRotation(), newCamOrientation = new SbRotation();
+    protected final SbVec3f         seekPoint = new SbVec3f();
+	protected final SbVec3f seekNormal = new SbVec3f();
+    protected final SbRotation      oldCamOrientation = new SbRotation();
+	protected final SbRotation newCamOrientation = new SbRotation();
     protected final SbVec3f         oldCamPosition = new SbVec3f(), newCamPosition = new SbVec3f();
 
     //! global vars
@@ -1118,6 +1120,35 @@ public void startDrag(final SbVec2s pos)
     cameraVolume.copyFrom(camera.getViewVolume(sceneSize.getValue()[0]/(float)(sceneSize.getValue()[1])));
     cameraVolume.projectPointToLine(relLocator, line);
     focalplane.intersect(line, locator3D);
+}
+
+
+protected void changeCameraValues(SoCamera newCamera)
+{
+    if (camera == null) {
+        return;
+    }
+
+    // only paste cameras of the same type
+    if (camera.getTypeId() != newCamera.getTypeId()) {
+        return;
+    }
+
+    // give our camera the values of the new camera
+    camera.position        .copyFrom( newCamera.position);
+    camera.orientation     .copyFrom( newCamera.orientation);
+    camera.nearDistance    .copyFrom( newCamera.nearDistance);
+    camera.farDistance     .copyFrom( newCamera.farDistance);
+    camera.focalDistance   .copyFrom( newCamera.focalDistance);
+
+    // get the height or heightAngle
+    if (camera.isOfType(SoPerspectiveCamera.getClassTypeId())) {
+        ((SoPerspectiveCamera )camera).heightAngle .copyFrom(
+                ((SoPerspectiveCamera )newCamera).heightAngle);
+    } else {
+        ((SoOrthographicCamera )camera).height .copyFrom(
+                ((SoOrthographicCamera )newCamera).height);
+    }
 }
 
 }

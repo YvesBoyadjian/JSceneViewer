@@ -156,7 +156,7 @@ public class SoQtViewer extends SoQtRenderArea {
 	        private SoCallbackList  startCBList;
 	        private SoCallbackList  finishCBList;
 	        
-	    private SoQtCameraController cameraController;
+	    protected SoQtCameraController cameraController;
 
 	    //! Constructor/Destructor
 	    public SoQtViewer() {
