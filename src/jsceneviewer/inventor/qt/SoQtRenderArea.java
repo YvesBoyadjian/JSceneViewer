@@ -51,6 +51,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 
 import jscenegraph.database.inventor.elements.SoWindowElement;
+import jscenegraph.database.inventor.events.SoEvent;
 import jscenegraph.database.inventor.misc.SoState;
 import jscenegraph.port.GLXContext;
 
@@ -60,7 +61,7 @@ import jscenegraph.port.GLXContext;
  */
 public class SoQtRenderArea extends SoQtGLWidget {
 	
-	private final SoQtSceneHandler soQtSceneHandler = new SoQtSceneHandler() {
+	private final SoQtSceneHandler soQtSceneHandler = new SoQtSceneHandler(this) {
 		
 	    //! overriden from SoQtSceneHandler
 	    protected void setWindowElement(SoState state) {
@@ -154,7 +155,7 @@ public class SoQtRenderArea extends SoQtGLWidget {
     //! Calling this forces the render area to be redrawn now.
     //! It is not necessary to call this method if auto redraw is enabled
     //! (which is the default).
-    void        render()        { updateGL(); }
+    public void        render()        { updateGL(); }
     
     protected //! this is emitted when the scene manager requests a redraw of the scene
     void redrawRequested() {
@@ -171,6 +172,38 @@ public class SoQtRenderArea extends SoQtGLWidget {
         	  soQtSceneHandler.deactivate();
           }    	
     }
+    
+
+// *************************************************************************
+
+/*!
+  Toolkit-native events are attempted converted to Coin-generic events
+  in the SoQtRenderArea::processEvent() method.  If this succeeds,
+  they are forwarded to this method.
+
+  This is a virtual method, and is overridden in it's subclasses to
+  catch events of particular interest to the viewer classes, for
+  instance.
+
+  Return \c TRUE iff the event was processed. If not it should be
+  passed on further up in the inheritance hierarchy by the caller.
+  This last point is extremely important to take note of if you are
+  expanding the toolkit with your own viewer class.
+
+  This method is not part of the original SGI InventorXt API. Note
+  that you can still override the toolkit-native processEvent() method
+  instead of this "generic" method.
+*/
+    // COIN3D
+protected boolean
+processSoEvent(final SoEvent event)
+{
+  //if (this.overlayManager.processEvent(event)) { return true; }
+  if (soQtSceneHandler.getSceneManager()/*this.normalManager*/.processEvent(event)) { return true; }
+  return false;
+}
+
+    
 
     //! Redefine these to do Inventor-specific things
     protected void processEvent (TypedEvent anyEvent, EventType type, final boolean[] isAccepted) {

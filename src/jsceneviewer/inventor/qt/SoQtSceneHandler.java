@@ -93,6 +93,8 @@ import jsceneviewer.inventor.qt.devices.SoQtDevice;
 //////////////////////////////////////////////////////////////////////////////
 
 public abstract class SoQtSceneHandler {
+	
+	private SoQtRenderArea parent;
 
     // subclasses have access to the device list for event processing
     private final List<SoQtDevice> deviceList = new ArrayList<>();        // list of devices
@@ -143,8 +145,10 @@ public abstract class SoQtSceneHandler {
     public SoGLRenderAction getGLRenderAction() 
                             { return sceneMgr.getGLRenderAction(); }    
     
-    public SoQtSceneHandler ()
+    public SoQtSceneHandler (SoQtRenderArea parent)
     {
+    	this.parent = parent;
+    	
         SoQt.init("Dummy");
 
         devicePixelRatio = 1.0;
@@ -603,7 +607,7 @@ void translateAndSendEvent(TypedEvent anyevent, EventType type)
 
     // now send the event to
     // the regular scene graph.
-    boolean handled = sceneMgr.processEvent (soevent);
+    boolean handled = parent.processSoEvent(soevent);//sceneMgr.processEvent (soevent);
     // now check to make sure that we updated the handle event action
     // with the current window the very first time. This is needed
     // because the SoState does not exists until the action is

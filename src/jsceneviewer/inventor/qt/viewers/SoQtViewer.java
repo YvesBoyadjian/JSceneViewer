@@ -168,9 +168,42 @@ public class SoQtViewer extends SoQtRenderArea {
 	    public SoQtViewer( Type type, Composite parent) {
 	    	this(type, parent, 0);
 	    }
+	    
+/*!
+  Constructor. \a parent, \a name and \a embed are passed on to
+  SoQtRenderArea, so see the documentation for our parent
+  constructor for for more information on those.
+
+  The \a t type setting hints about what context the viewer will be
+  used in.  Usually not very interesting for the application
+  programmer, but if you want to make sure the SoQtViewer class
+  doesn't muck about with your supplied scenegraph, set the type-flag
+  to SoQtViewer::BROWSER.  (This "feature" of the viewer is
+  included just to be compatible with the old SGI Inventor API.)
+
+  The \a build flag decides whether or not to delay building the
+  widgets / window which is going to make up the components of the
+  viewer.
+*/
+	    public SoQtViewer(Composite parent,
+                             String name,
+                             boolean embed,
+                             Type t,
+                             boolean build) {
+	    	this(t,parent,0,build);
+	    }
+	    public SoQtViewer (Type type, Composite parent, int style, boolean build) {
+	    	super(parent, style, build);
+	    	constructorCommon(type);
+	    }
+	    	
+	    	    	    
 	    public SoQtViewer (Type type, Composite parent, int style) {
 	    	super(parent, style, false);
+	    	constructorCommon(type);
+	    }
 	    	
+	    private void constructorCommon(Type type) {
 	    	cameraController = new SoQtCameraController(type) {
 
 				@Override

@@ -71,13 +71,14 @@ import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.swt.GLCanvas;
 
 import jscenegraph.database.inventor.SbVec2s;
+import jscenegraph.port.Destroyable;
 import jsceneviewer.BorderLayout;
 
 /**
  * @author Yves Boyadjian
  *
  */
-public class SoQtGLWidget extends Composite {
+public class SoQtGLWidget extends Composite implements Destroyable {
 	
 	private final int style;
 	
@@ -131,7 +132,7 @@ public class SoQtGLWidget extends Composite {
 
 public GLCapabilities format()
 {
-    if (mainWidget != null) {
+    if (mainWidget != null && mainWidget.isRealized()) {
         return (GLCapabilities)mainWidget.getChosenGLCapabilities();
     } else {
         // return default format
@@ -426,7 +427,7 @@ public GLCapabilities format()
 			});
     }
     
-    protected void destructor() {
+    public void destructor() {
         contextShareManager.removeWidget (mainWidget);
 	}
 
@@ -626,4 +627,51 @@ public int getColorBitDepth()
 	protected boolean      isStereoBuffer()  { 
 		return /*context().format().stereo()*/false; //TODO 
 	}
+	
+	/**
+	 * Java port
+	 * @return
+	 */
+	public Composite getParentWidget() {
+		return getParent();
+	}
+	
+	/**
+	 * Java port
+	 */
+	  public boolean isFullScreen() {
+		  return false; //TODO
+	  }
+
+	  /**
+	   * Java port
+	   * @param onoff
+	   * @return
+	   */
+	  public boolean setFullScreen(boolean onoff) {
+		  return false; // TODO
+	  }
+
+	  /**
+	   * Java port
+	   * @param title
+	   */
+	  public void setTitle(String title) {
+		  // TODO
+	  }
+	  
+	  /**
+	   * Java port
+	   * @param size
+	   */
+	  public void setSize( SbVec2s size) {
+		  // TODO
+	  }
+	  
+	  /**
+	   * Java port
+	   */
+	  public void show() {
+		  // TODO
+	  }
 }
