@@ -889,6 +889,13 @@ public void    setAltSwitchingEnabled (boolean on) {
 }
 public boolean            isAltSwitchingEnabled() { return altSwitchingEnabled; };
 
+//! Set and get the feature that the cursor keys manipulate the camera,
+//! S requests seek mode, and ESC switches picking mode. Default is ON
+public  void    setKeyCommandsEnabled (boolean on) {
+    keyCommandsEnabled = on;
+}
+public boolean            isKeyCommandsEnabled() { return keyCommandsEnabled; };
+
 
 
 //! Set/get whether the viewer is turned on or off. When turned off

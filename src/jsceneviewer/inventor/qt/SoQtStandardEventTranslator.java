@@ -158,8 +158,8 @@ public class SoQtStandardEventTranslator {
         event = translateMotionEvent(mouseEvent, viewportSize);
   }
   else if ( anyEvent instanceof KeyEvent) {
-	  SoButtonEvent.State whichState = State.UNKNOWN;
-	  if(((KeyEvent)anyEvent).stateMask == 0) {
+	  //SoButtonEvent.State whichState = State.UNKNOWN;
+	  if(type == EventType.KEY_EVENT_KEY_PRESSED) {
 	        event = translateKeyEvent((KeyEvent ) anyEvent, SoButtonEvent.State.DOWN, viewportSize);
 	  }
 	  else {
